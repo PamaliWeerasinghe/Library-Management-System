@@ -21,13 +21,24 @@ public class CourselibraryApplication {
 	public CommandLineRunner initialCreate(BookService bookService){
 		return (args)->{
 			Book book1=new Book("ABC","Book Name","My First Book");
-			Author author1=new Author("Test name2","Test Description");
+			Author author1=new Author("Test name1","Test Description");
 			Category category1=new Category("Science Books");
-			Publisher publisher1=new Publisher("Second Publisher");
+			Publisher publisher1=new Publisher("First Publisher");
 			book1.addAuthor(author1);
 			book1.addCategory(category1);
 			book1.addPublisher(publisher1);
 			bookService.createBook(book1);
+
+			Book book2=new Book("DEF","Book 2","My Second Book");
+			Author author2=new Author("Test name2","Second Description");
+			Category category2=new Category("Math Books");
+			Publisher publisher2=new Publisher("Second Publisher");
+			book2.addAuthor(author2);
+			book2.addCategory(category2);
+			book2.addPublisher(publisher2);
+			bookService.createBook(book2);
+
+
 		};
 	}
 }
