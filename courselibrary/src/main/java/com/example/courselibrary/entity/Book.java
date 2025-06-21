@@ -1,12 +1,14 @@
 package com.example.courselibrary.entity;
 
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Getter
 @Setter
@@ -21,6 +23,7 @@ public class Book {
     private Long id;
 
     @Column(name = "name", length = 50,nullable = false)
+
     private String name;
 
     @Column(name = "isbn", length = 50,nullable = false,unique = true)
