@@ -33,4 +33,8 @@ public class BookService {
     public void updateBook(Book book){
         bookRepository.save(book);
     }
+
+    public List<Book> findBooksByPublisher_Id(Long Id){
+        return bookRepository.findByPublishers_Id(Id);
+    }
 }
