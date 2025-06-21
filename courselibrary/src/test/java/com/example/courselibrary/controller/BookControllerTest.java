@@ -8,6 +8,7 @@ import com.example.courselibrary.service.CategoryService;
 import com.example.courselibrary.service.PublisherService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -20,10 +21,15 @@ import static org.mockito.Mockito.*;
 
 public class BookControllerTest {
 
+
     private BookController controller;
+    @Autowired
     private BookService bookService;
+    @Autowired
     private CategoryService categoryService;
+    @Autowired
     private PublisherService publisherService;
+    @Autowired
     private AuthorService authorService;
 
     @BeforeEach
