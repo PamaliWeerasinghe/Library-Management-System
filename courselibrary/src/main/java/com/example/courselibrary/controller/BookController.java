@@ -81,7 +81,7 @@ public class BookController {
         return "add-book";
     }
     @PostMapping("/save-book")
-    public String updateBook(Book book, BindingResult result,Model model){
+    public String UpdateBook(Book book, BindingResult result,Model model){
         if(result.hasErrors()){
             return  "add-book";
         }

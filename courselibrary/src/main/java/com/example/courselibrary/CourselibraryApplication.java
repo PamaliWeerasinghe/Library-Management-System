@@ -17,6 +17,7 @@ public class CourselibraryApplication {
 		SpringApplication.run(CourselibraryApplication.class, args);
 	}
 
+
 	@Bean
 	public CommandLineRunner initialCreate(BookService bookService){
 		return (args)->{
