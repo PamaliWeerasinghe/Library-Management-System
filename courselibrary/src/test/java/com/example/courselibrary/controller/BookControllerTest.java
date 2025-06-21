@@ -1,5 +1,4 @@
 package com.example.courselibrary.controller;
-
 import com.example.courselibrary.controller.BookController;
 import com.example.courselibrary.entity.Book;
 import com.example.courselibrary.service.AuthorService;
@@ -8,12 +7,12 @@ import com.example.courselibrary.service.CategoryService;
 import com.example.courselibrary.service.PublisherService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,54 +20,33 @@ import static org.mockito.Mockito.*;
 
 public class BookControllerTest {
 
-
     private BookController controller;
-    @Autowired
     private BookService bookService;
-    @Autowired
     private CategoryService categoryService;
-    @Autowired
     private PublisherService publisherService;
-    @Autowired
     private AuthorService authorService;
 
     @BeforeEach
-    void setup() {
+    void setup() throws Exception {
+        controller = new BookController();
+
+        // Create mocks
         bookService = mock(BookService.class);
         categoryService = mock(CategoryService.class);
         publisherService = mock(PublisherService.class);
         authorService = mock(AuthorService.class);
 
-        controller = new BookController();
-        controller.getClass().getDeclaredFields(); // only needed if you want to autowire manually (not required here)
+        // Inject mocks using reflection
+        injectPrivateField(controller, "bookService", bookService);
+        injectPrivateField(controller, "categoryService", categoryService);
+        injectPrivateField(controller, "publisherService", publisherService);
+        injectPrivateField(controller, "authorService", authorService);
+    }
 
-        // Inject manually
-        controller.getClass(); // You can also create a constructor for BookController if you prefer clean injection
-        controller = new BookController();
-        controller.getClass(); // redundant, but showing that nothing fancy is used
-        controller = new BookController();
-        controller.getClass();
-        controller = new BookController();
-
-        controller = new BookController();
-        controller.getClass();
-        controller = new BookController();
-        controller = new BookController();
-        controller.getClass();
-
-        controller = new BookController();
-
-        // Assign fields using reflection if needed (but normally avoided)
-        controller = new BookController();
-
-        // Instead just recreate with mock services (better):
-        controller = new BookController() {{
-            // set private fields manually
-            bookService = BookControllerTest.this.bookService;
-            categoryService = BookControllerTest.this.categoryService;
-            publisherService = BookControllerTest.this.publisherService;
-            authorService = BookControllerTest.this.authorService;
-        }};
+    private void injectPrivateField(Object target, String fieldName, Object value) throws Exception {
+        Field field = target.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        field.set(target, value);
     }
 
     @Test
